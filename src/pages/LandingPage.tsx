@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion'
 import { Button } from "@/components/ui/button"
+import { useAppDispatch } from '@/lib/hooks'
+import { setLanding } from '@/store/slices/uiSlice'
 
 export function LandingPage() {
-
+    const dispatch = useAppDispatch()
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -41,7 +43,8 @@ export function LandingPage() {
           <Button
             size="lg"
             className='bg-[#0071e3] hover:bg-[#0071e3] px-4 sm:px-6 rounded-full text-white font-proDisplayRegular text-[14px] sm:text-[18px] hover:'
-            onClick={() => {}}
+            onClick={() => dispatch(setLanding(false))}
+         
           >
             Get started
           </Button>
