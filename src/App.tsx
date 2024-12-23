@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import { LandingPage } from "./pages/LandingPage";
+import { Header } from "./components/Header";
+import { motion } from "framer-motion";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentFace, setCurrentFace] = useState("/face1.png");
+  const [currentBand, setCurrentBand] = useState("/band1.jpeg");
+  const [isGreeting, setIsGreeting] = useState(true);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Header />
+      <LandingPage />
+      <div className="text-center">
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: "28rem",
+            scale: 2,
+            top: "15vh",
+          }}
+          animate={{
+            opacity: 1,
+            y: isGreeting ? "28rem" : 0,
+            scale: isGreeting ? 2 : 1,
+            top: isGreeting ? "15vh" : "4vh",
+          }}
+          transition={{
+            duration: 1.2,
+            ease: "easeOut",
+            delay: 0.4,
+          }}
+          className="relative overflow-hidden mx-auto max-w-[300px] md:max-w-[400px] lg:max-w-[500px]"
+        >
+          <div className="relative pt-[133%] md:pt-[110%] lg:pt-[104%]"> 
+            <img
+              src={currentBand}
+              alt="watch band preview"
+              className="absolute inset-0 object-contain w-full h-full"
+            />
+            <img
+              src={currentFace}
+              alt="watch case preview"
+              className="absolute inset-0 object-contain w-full h-full"
+            />
+          </div>
+        </motion.div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
