@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { LandingPage } from "./pages/LandingPage";
 import { Header } from "./components/Header";
@@ -12,38 +12,58 @@ function App() {
   const [currentFace, setCurrentFace] = useState("/face1.png");
   const [currentBand, setCurrentBand] = useState("/band1.jpeg");
   const [sideview, setSideView] = useState(false);
-  const isLanding = useAppSelector(state => state.ui.isLanding)
-  const isCollectionDrop = useAppSelector(state=>state.ui.isCollectionDrop)
-  console.log(isCollectionDrop)
+  const isLanding = useAppSelector((state) => state.ui.isLanding);
+
+  const [scaleValue, setScaleValue] = useState(2);
+
+  useEffect(() => {
+    const calculateScale = () => {
+      const screenHeight = window.innerHeight;
+      const scale = screenHeight > 800 ? 0.9 : 0.7;
+      setScaleValue(scale);
+    };
+
+    calculateScale();
+
+    window.addEventListener("resize", calculateScale);
+
+    return () => {
+      window.removeEventListener("resize", calculateScale);
+    };
+  }, []);
+
   return (
     <>
       <Header />
-      {
-        isLanding&&<LandingPage />
-      }
-     
-      <div className="text-center">
+      {isLanding && <LandingPage />}
+
+      <div
+        className={`text-center ${
+          scaleValue < 0.9 ? "max-h-[50vh]" : "max-h-[60vh]"
+        } min-h-60`}
+      >
         <motion.div
           initial={{
             opacity: 0,
             y: "26rem",
             scale: 2,
-            top: "15vh",
+            top: "7vh",
           }}
           animate={{
             opacity: 1,
             y: isLanding ? "26rem" : 0,
-            scale: isLanding ? 2 : 0.9,
-            top: isLanding ? "15vh" : "4vh",
+            scale: isLanding ? 1.5 : scaleValue,
+            top: isLanding ? -50 : "2vh",
           }}
           transition={{
             duration: 1.2,
             ease: "easeOut",
             delay: 0.4,
           }}
+          style={{ transformOrigin: "top center" }}
           className="relative overflow-hidden mx-auto max-w-[300px] md:max-w-[400px] lg:max-w-[500px]"
         >
-          <div className="relative pt-[133%] md:pt-[110%] lg:pt-[104%]"> 
+          <div className="relative pt-[133%] md:pt-[110%] lg:pt-[104%]">
             <img
               src={currentBand}
               loading="lazy"
@@ -76,7 +96,7 @@ function App() {
             </button>
 
             <WatchDescription />
-            <FeatureButtons/>
+            <FeatureButtons />
           </motion.div>
         </>
       )}

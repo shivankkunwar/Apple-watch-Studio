@@ -1,6 +1,6 @@
 export type WatchCollection = 'Series 10' | 'Hermès' | 'SE'
 
-export type WatchSize = string
+export type WatchSize = { id: string, size: string, price: number }
 
 export type CaseMaterial = 'Aluminum' | 'Titanium' | 'Stainless Steel'
 
@@ -23,10 +23,12 @@ export interface Case {
 export interface Band {
   id: string
   name: string
-  type: string
-  color: string
-  price: number
-  imageUrl: string
+  variations : {
+    id: string
+    name: string
+    price: number,
+    image: string,
+  }[],
 }
 
 export interface WatchConfiguration {
@@ -40,7 +42,7 @@ export interface WatchConfiguration {
 export interface Collection {
   id: WatchCollection
   name: string
-  sizes: { id:string,size: WatchSize; price: number }[]
+  sizes: WatchSize[]
   cases: Case[]
   bands: Band[]
 }
