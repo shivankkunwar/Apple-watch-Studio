@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
+import watchReducer from './slices/watchSlice'
 import uiReducer from './slices/uiSlice'
 
 export const store = configureStore({
   reducer: {
- 
+    watch: watchReducer,
     ui: uiReducer
   }
 })

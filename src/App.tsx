@@ -4,20 +4,24 @@ import { LandingPage } from "./pages/LandingPage";
 import { Header } from "./components/Header";
 import { motion } from "framer-motion";
 import { useAppSelector } from "./lib/hooks";
+import { CollectionDrop } from "./components/CollectionDrop";
+import WatchDescription from "./components/WatchDescription";
+import FeatureButtons from "./components/FeatureButtons";
 
 function App() {
   const [currentFace, setCurrentFace] = useState("/face1.png");
   const [currentBand, setCurrentBand] = useState("/band1.jpeg");
+  const [sideview, setSideView] = useState(false);
   const isLanding = useAppSelector(state => state.ui.isLanding)
-
-  
+  const isCollectionDrop = useAppSelector(state=>state.ui.isCollectionDrop)
+  console.log(isCollectionDrop)
   return (
     <>
       <Header />
       {
         isLanding&&<LandingPage />
       }
-      
+     
       <div className="text-center">
         <motion.div
           initial={{
@@ -55,6 +59,27 @@ function App() {
           </div>
         </motion.div>
       </div>
+      {!isLanding && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.5, delay: 1.5, ease: "easeInOut" }}
+            className="m-auto flex flex-col pt-[6vh] text-center justify-center items-center font-proTextRegular text-sm   leading-[1.42]"
+          >
+            <button
+              onClick={() => setSideView(!sideview)}
+              className="mb-3 text-[#06c] underline text-xs"
+            >
+              {sideview ? "Front view" : "Side view"}
+            </button>
+
+            <WatchDescription />
+            <FeatureButtons/>
+          </motion.div>
+        </>
+      )}
     </>
   );
 }

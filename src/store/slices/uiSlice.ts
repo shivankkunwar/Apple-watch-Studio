@@ -2,12 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface UIState {
   isLanding: boolean
-  isCollectionModal: boolean
+  isCollectionDrop: boolean
+  featureButtonOpen: string | null
 }
 
 const initialState: UIState = {
   isLanding: true,
-  isCollectionModal: false
+  isCollectionDrop: false,
+  featureButtonOpen: null
 }
 
 export const uiSlice = createSlice({
@@ -17,13 +19,16 @@ export const uiSlice = createSlice({
     setLanding: (state, action: PayloadAction<boolean>) => {
       state.isLanding = action.payload
     },
-    setCollectionModal: (state, action: PayloadAction<boolean>) => {
-      state.isCollectionModal = action.payload
+    setIsCollectionDrop: (state, action: PayloadAction<boolean>) => {
+      state.isCollectionDrop = action.payload
+    },
+    setFeatureButtonOpen: (state, action: PayloadAction<string>) => {
+      state.featureButtonOpen = state.featureButtonOpen === action.payload ? null : action.payload;
     }
   }
 })
 
-export const { setLanding, setCollectionModal } = uiSlice.actions
+export const { setLanding, setIsCollectionDrop, setFeatureButtonOpen } = uiSlice.actions
 
 export default uiSlice.reducer
 
