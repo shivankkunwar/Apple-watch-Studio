@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import {
-  setSize,
-} from "@/store/slices/watchSlice";
-import{ setFeatureButtonOpen} from "@/store/slices/uiSlice";
+import { setBand, setFace, setSize } from "@/store/slices/watchSlice";
+import { setFeatureButtonOpen } from "@/store/slices/uiSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { motion } from "framer-motion";
@@ -10,19 +8,16 @@ import { collections } from "@/data/collections";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 
 const FeatureButtons = () => {
-  const dispatch = useAppDispatch()
-  const {
-    collection,
-    size,
-    selectedMainCase,
-    selectedMainBand,
-  } = useSelector((state: any) => state.watch);
+  const dispatch = useAppDispatch();
+  const { collection, size, face, band } = useSelector(
+    (state: any) => state.watch
+  );
   const openButton = useAppSelector((state: any) => state.ui.featureButtonOpen);
 
   const filteredCases = collections.find((item) => item.id === collection);
 
   return (
-    <footer className="bottom-[40px] box-border mt-[0px] md:mt-[72px]  py-[24px]  text-center whitespace-nowrap w-full">
+    <footer className="bottom-[40px] box-border mt-[0px] md:mt-[72px]    text-center whitespace-nowrap w-full">
       <div className="min-h-[35px] overflow-x-auto pb-[5px] flex justify-center w-full">
         <div className="bg-[#e8e8ed] space-x-2 rounded-full items-center flex text-[#1d1d1f] border-none mx-[6px] px-4 sm:px-6 font-proTextRegular text-[14px] sm:text-[16px] md:text-[17px] tracking-[-.022em]">
           <div className="inline-block">
@@ -52,12 +47,10 @@ const FeatureButtons = () => {
                   key={option.id}
                   onClick={() => dispatch(setSize(option))}
                   className={`my-[5px] min-h-[20px] text-[16px] md:text-[17px]  align-middle text-[#1d1d1f] py-[5px] ${
-                    size.name === option.id
-                      ? "font-proTextSemibold"
-                      : "font-proTextRegular"
+                    size?.id === option.id ? "font-bold" : "font-proTextRegular"
                   }`}
                 >
-                  {option.name}
+                  {option.size}
                 </button>
               ))
             ) : (
@@ -87,21 +80,24 @@ const FeatureButtons = () => {
             </svg>
           </div>
           {openButton === "Case" ? (
-            filteredCases?.cases.map((mainCase: any) => (
-              <button
-                key={mainCase.id}
-                onClick={() =>{}
-                  
-                }
-                className={`my-[5px] min-h-[20px] text-[16px] md:text-[17px]  align-middle text-[#1d1d1f] py-[5px] ${
-                  selectedMainCase.id === mainCase.id
-                    ? "font-proTextSemibold"
-                    : "font-proTextRegular"
-                }`}
-              >
-                {mainCase.name}
-              </button>
-            ))
+            filteredCases?.cases.map((mainCase: any) => {
+              return (
+                <button
+                  key={mainCase.id}
+                  onClick={() => {
+                    console.log("clcied");
+                    dispatch(setFace(mainCase));
+                  }}
+                  className={`my-[5px] min-h-[20px] text-[16px] md:text-[17px]  align-middle text-[#1d1d1f] py-[5px] ${
+                    face.id === mainCase.id
+                      ? "font-bold"
+                      : "font-proTextRegular"
+                  }`}
+                >
+                  {mainCase.name}
+                </button>
+              );
+            })
           ) : (
             <button
               onClick={() => dispatch(setFeatureButtonOpen("Case"))}
@@ -131,12 +127,16 @@ const FeatureButtons = () => {
             filteredCases?.bands.map((mainBand: any) => (
               <button
                 key={mainBand.id}
-                onClick={() =>
-                  {}
-                }
+                onClick={() => {
+                    dispatch(setBand({
+                        id: mainBand.id,
+                        name: mainBand.name,
+                        variations: []
+                    }))
+                }}
                 className={`my-[5px] min-h-[20px] px-1 text-[16px] md:text-[17px]  align-middle text-[#1d1d1f] py-[5px] ${
-                  selectedMainBand.id === mainBand.id
-                    ? "font-proTextSemibold"
+                  band.id === mainBand.id
+                    ? "font-bold"
                     : "font-proTextRegular"
                 }`}
               >
