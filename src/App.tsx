@@ -7,6 +7,10 @@ import { useAppSelector } from "./lib/hooks";
 import { CollectionDrop } from "./components/CollectionDrop";
 import WatchDescription from "./components/WatchDescription";
 import FeatureButtons from "./components/FeatureButtons";
+import SizeSelection from "./components/carousel/SizeSelection";
+import useHeightScale from "./hooks/useHeightScale";
+import CaseSelection from "./components/carousel/CaseSelection";
+import BandSelection from "./components/carousel/BandSelection";
 
 function App() {
   const [currentFace, setCurrentFace] = useState("/face1.png");
@@ -14,34 +18,28 @@ function App() {
   const [sideview, setSideView] = useState(false);
   const isLanding = useAppSelector((state) => state.ui.isLanding);
 
-  const [scaleValue, setScaleValue] = useState(2);
+  
+  const openButton = useAppSelector((state: any) => state.ui.featureButtonOpen);
 
-  useEffect(() => {
-    const calculateScale = () => {
-      const screenHeight = window.innerHeight;
-      const scale = screenHeight > 800 ? 0.9 : 0.7;
-      setScaleValue(scale);
-    };
-
-    calculateScale();
-
-    window.addEventListener("resize", calculateScale);
-
-    return () => {
-      window.removeEventListener("resize", calculateScale);
-    };
-  }, []);
+  const scaleValue = useHeightScale()
 
   return (
     <>
       <Header />
       {isLanding && <LandingPage />}
-
+      
       <div
         className={`text-center ${
           scaleValue < 0.9 ? "max-h-[50vh]" : "max-h-[60vh]"
         } min-h-60`}
       >
+        {openButton === "Size" && <SizeSelection />}
+        {openButton === "Case" && <CaseSelection />}
+        {openButton === "Band" && <BandSelection/>}
+        {openButton === null && (
+              <div
+                className={`h-[45vh] md:h-[50vh] lg:h-[53vh] max-h-[29.88rem] min-h-[18.47rem] m-auto max-w-[300px] md:max-w-[400px] lg:max-w-[500px] w-[42vh] md:w-[48vh] lg:w-[52vh] relative`}
+              >
         <motion.div
           initial={{
             opacity: 0,
@@ -78,6 +76,8 @@ function App() {
             />
           </div>
         </motion.div>
+        </div>
+        )}
       </div>
       {!isLanding && (
         <>
