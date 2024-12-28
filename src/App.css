@@ -5,3 +5,14 @@
     color:#1d1d1f;
     font-family: SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
+
+.image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: margin 0.3s ease;
+  }
+  .image-selected {
+    margin-left: 20px; /* Space for the left */
+    margin-right: 20px; /* Space for the right */
+  }
