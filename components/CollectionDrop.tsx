@@ -16,7 +16,7 @@ export function CollectionDrop() {
     <div className="relative">
       <button
         onClick={() => dispatch(setIsCollectionDrop(!isOpen))}
-        className="flex items-center gap-2 text-[17px] tracking-tight"
+        className="flex items-center gap-2 text-[17px] font-normal tracking-tight"
       >
         <span>Collections</span>
         <ChevronDown className="h-4 w-4" />
@@ -38,7 +38,7 @@ export function CollectionDrop() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="absolute -left-24   transform  top-[40px] z-50 min-w-72 rounded-[18px] bg-white shadow-lg flex flex-col justify-center items-center"
+              className="fixed  -translate-x-1/2 top-[120px] left-[3.7rem] md:absolute  md:translate-x-0 md:-left-24 md:top-[40px] z-50 min-w-72 rounded-[18px] bg-white shadow-lg flex flex-col justify-center items-center"
               style={{ maxWidth: "816px" }}
             >
               <div className="px-[16px] w-fit flex flex-col justify-center items-center">
@@ -71,4 +71,4 @@ export function CollectionDrop() {
       </AnimatePresence>
     </div>
   );
-}
+};

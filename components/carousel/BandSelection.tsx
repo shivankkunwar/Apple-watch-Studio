@@ -7,7 +7,7 @@ import { setBand } from "@/store/slices/watchSlice";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { setIsSideView } from "@/store/slices/uiSlice";
 
-const BandSlider = () => {
+const BandSelection = () => {
   const dispatch = useDispatch();
   const containerRef = useRef<HTMLDivElement>(null);
   const [showLeftButton, setShowLeftButton] = useState(false);
@@ -448,4 +448,4 @@ console.log(selectedBand,selectedFace)
   );
 };
 
-export default BandSlider;
+export default BandSelection;

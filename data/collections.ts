@@ -90,7 +90,7 @@ export const collections: Collection[] = [
         },
         
         {
-          id: "ligh_blush_solo",
+          id: "light_blush_solo",
           name: "Light Blush Solo Loop",
           price: 98,
           image: "/images/bands/solo_light_blush_10.jpg",
@@ -244,12 +244,7 @@ export const collections: Collection[] = [
                 image: "/images/cases/aluminum_starlight_se.png",
               },
     
-              {
-                id: "aluminum_silver",
-                name: "Silver Aluminum Case",
-                price: 150,
-                image: "/images/cases/aluminum_silver_se.png",
-              },
+             
             ],
           },
      
@@ -266,18 +261,7 @@ export const collections: Collection[] = [
                 price: 129,
                 image: "/images/bands/milanese_natural_10.jpg",
               },
-              {
-                id: "gold_milanese",
-                name: "Gold Milanese Loop",
-                price: 139,
-                image: "/images/bands/milanese_gold_10.jpg",
-              },
-              {
-                id: "slate_milanese",
-                name: "Slate Milanese Loop",
-                price: 149,
-                image: "/images/bands/milanese_slate_10.jpg",
-              },
+            
             ],
           },
           {
@@ -290,18 +274,7 @@ export const collections: Collection[] = [
                 price: 49,
                 image: "/images/bands/sport_ultramarine_10.jpg",
               },
-              {
-                id: "lake_green_sport",
-                name: "Lake Green Sport Loop",
-                price: 49,
-                image: "/images/bands/sport_lake_green_10.jpg",
-              },
-              {
-                id: "blue_cloud_sport",
-                name: "Blue Cloud Sport Loop",
-                price: 49,
-                image: "/images/bands/sport_blue_cloud_10.jpg",
-              },
+             
             ],
           },
           {
@@ -319,25 +292,7 @@ export const collections: Collection[] = [
                 name: "Ultramarine Solo Loop",
                 price: 69,
                 image: "/images/bands/solo_ultramarine_10.jpg",
-              },
-              {
-                id: "lake_green_solo",
-                name: "Lake Green Solo Loop",
-                price: 69,
-                image: "/images/bands/solo_lake_green_10.jpg",
-              },
-              {
-                id: "black_solo",
-                name: "Black Solo Loop",
-                price: 69,
-                image: "/images/bands/solo_black_10.jpg",
-              },
-              {
-                id: "ligh_blush_solo",
-                name: "Light Blush Solo Loop",
-                price: 69,
-                image: "/images/bands/solo_light_blush_10.jpg",
-              },
+              }
             ],
           }
         

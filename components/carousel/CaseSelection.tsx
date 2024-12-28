@@ -6,7 +6,7 @@ import { setFace } from "@/store/slices/watchSlice";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { setIsSideView } from "@/store/slices/uiSlice";
 
-const CaseSlider = () => {
+const CaseSelection = () => {
   const dispatch = useDispatch();
   const containerRef = useRef<HTMLDivElement>(null);
   const [showLeftButton, setShowLeftButton] = useState(false);
@@ -338,5 +338,5 @@ const CaseSlider = () => {
   );
 };
 
-export default CaseSlider;
+export default CaseSelection;
 
