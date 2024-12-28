@@ -208,6 +208,54 @@ export const watchSlice = createSlice({
     ) => {
       state.activeSection = action.payload;
     },
+    
+    setFullConfiguration: (state, action: PayloadAction<{
+      collection: string;
+      size: string;
+      case: string;
+      band: string;
+    }>) => {
+      const { collection, size, case: caseId, band: bandId } = action.payload
+      
+      // Find the collection
+      const newCollection = collections.find(c => c.id === collection)
+      if (!newCollection) return
+      
+      // Set collection
+      state.collection = newCollection.id
+      
+      // Set size
+      const newSize = newCollection.sizes.find(s => s.id === size)
+      if (newSize) state.size = newSize
+      
+      // Set case
+      const caseCategory = newCollection.cases.find(c => 
+        c.variations?.some(v => v.id === caseId)
+      )
+      const caseVariation = caseCategory?.variations?.find(v => v.id === caseId)
+      
+      if (caseCategory && caseVariation) {
+        state.mainFace = caseCategory
+        state.selectedFace = caseVariation
+        state.currentFaceImage = caseVariation.image
+      }
+      
+      // Set band
+      const bandCategory = newCollection.bands.find(b => 
+        b.variations.some(v => v.id === bandId)
+      )
+      const bandVariation = bandCategory?.variations.find(v => v.id === bandId)
+      
+      if (bandCategory && bandVariation) {
+        state.mainBand = bandCategory
+        state.selectedBand = bandVariation
+        state.currentBandImage = bandVariation.image
+      }
+      
+      // Update side image and total price
+      state.sideImage = `/images/side/${caseVariation?.id}_${bandVariation?.id}_side.jpg`
+      state.totalPrice = (caseVariation?.price || 0) + (bandVariation?.price || 0) + (newSize?.price || 0)
+    }
   },
 });
 
@@ -219,7 +267,8 @@ export const {
   setView,
   setActiveSection,
   setSelectedMainCase,
-  setSelectedMainBand
+  setSelectedMainBand,
+  setFullConfiguration
 } = watchSlice.actions;
 
 export default watchSlice.reducer;

@@ -13,6 +13,8 @@ import useHeightScale from "@/hooks/useHeightScale";
 import CaseSelection from "@/components/carousel/CaseSelection";
 import BandSelection from "@/components/carousel/BandSelection";
 import { setIsSideView } from "@/store/slices/uiSlice";
+import { parseUrlParams, clearUrlParams } from "@/lib/url-utils"
+import { setFullConfiguration } from "@/store/slices/watchSlice"
 
 function Home() {
 const dispatch = useAppDispatch();
@@ -23,7 +25,19 @@ const dispatch = useAppDispatch();
     (state: any) => state.watch
   );
   const scaleValue = useHeightScale();
-  //console.log(sideImage)
+  useEffect(() => {
+    const urlConfig = parseUrlParams()
+    if (urlConfig) {
+      const validConfig = {
+        collection: urlConfig.collection || '',
+        size: urlConfig.size || '',
+        case: urlConfig.case || '',
+        band: urlConfig.band || ''
+      };
+      dispatch(setFullConfiguration(validConfig))
+      clearUrlParams()
+    }
+  }, [dispatch])
   return (
     <>
       <Header />

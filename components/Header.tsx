@@ -3,9 +3,12 @@ import { FaApple } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { motion } from "framer-motion";
 import { CollectionDrop } from "./CollectionDrop";
+import { SaveModal } from "./SaveModal"
+import { useState } from "react";
 
 export const Header = () => {
   const dispatch = useAppDispatch();
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false)
   const { isLanding } = useAppSelector(state => state.ui);
 
   return (
@@ -36,10 +39,8 @@ export const Header = () => {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.5, delay: 0.5, ease: "easeIn" }}
-                className="font-proTextRegular bg-[#0071e3] px-4 py-2 rounded-full text-[14px] text-white"
-                onClick={() => {
-                 
-                }}
+                className="font-normal bg-[#0071e3] px-4 py-2 rounded-full text-[14px] text-white"
+                onClick={() => setIsSaveModalOpen(true)}
               >
                 Save
               </motion.button>
@@ -47,6 +48,10 @@ export const Header = () => {
           </div>
         )}
       </div>
+      <SaveModal 
+        isOpen={isSaveModalOpen} 
+        onClose={() => setIsSaveModalOpen(false)} 
+      />
     </header>
   );
 };
