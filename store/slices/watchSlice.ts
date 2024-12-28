@@ -76,18 +76,24 @@ export const watchSlice = createSlice({
     setCollection: (state, action: PayloadAction<WatchCollection>) => {
       const newCollection = collections.find((c) => c.id === action.payload);
       if (!newCollection) return;
-      console.log(newCollection)
+      // console.log(newCollection) 
       state.collection = newCollection.id;
       state.size = newCollection.sizes[0];
-      state.face = newCollection.cases[0];
-      state.band = newCollection.bands[0];
+      state.selectedFace = newCollection.cases[0]?.variations?.[0] as selectedFace;
+      state.mainFace = newCollection.cases[0];
+      console.log(newCollection.bands[0]?.variations?.[0])
+      state.selectedBand = newCollection.bands[0]?.variations?.[0] as selectedBand;
+      console.log(newCollection.cases[0]?.variations?.[0])
+      state.mainBand = newCollection.bands[0];
+
+      state.currentBandImage = newCollection.bands[0].variations[0].image;
+      state.currentFaceImage = newCollection.cases[0].variations?.[0]?.image ?? '';
+      console.log(newCollection.cases[0].variations?.[0]?.id)
+      state.sideImage = `/images/side/${newCollection.cases[0].variations?.[0]?.id ?? 'aluminium_black'}_${newCollection.bands[0].variations[0].id}_side.jpg`;
       state.totalPrice =
         newCollection.cases[0].variations?.[0]?.price ?? 0 +
         newCollection.bands[0].variations[0].price +
         newCollection.sizes[0].price;
-
-        state.currentBandImage = newCollection.bands[0].variations[0].image;
-        state.currentFaceImage = newCollection.cases[0].variations?.[0]?.image ?? '';
       },
 
     setSize: (state, action: PayloadAction<WatchSize>) => {

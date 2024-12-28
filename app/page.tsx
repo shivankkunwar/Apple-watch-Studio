@@ -23,7 +23,7 @@ const dispatch = useAppDispatch();
     (state: any) => state.watch
   );
   const scaleValue = useHeightScale();
-
+  //console.log(sideImage)
   return (
     <>
       <Header />
