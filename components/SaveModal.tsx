@@ -54,7 +54,8 @@ export function SaveModal({ isOpen, onClose }: SaveModalProps) {
                   alt="Watch Configuration"
                   className="w-full h-full object-contain p-8"
                   height={1000}
-              width={1000}
+                  width={1000}
+                  loading="lazy"
                 />
               </div>
             </div>

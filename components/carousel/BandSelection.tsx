@@ -306,6 +306,7 @@ const BandSelection = () => {
                                 className="w-full h-full object-contain"
                                 height={1000}
                                 width={1000}
+                                loading="lazy"
                             />
                         </motion.div>
                     )}
@@ -403,6 +404,7 @@ const BandSelection = () => {
                                                                 src={`/images/side/${selectedFace?.id}_${selectedBand?.id}_side.jpg`}
                                                                 height={1000}
                                                                 width={1000}
+                                                                loading="lazy"
                                                                 alt={variation.name}
                                                                 className="object-cover w-[52vh] max-w-[500px]"
                                                             />
@@ -411,6 +413,7 @@ const BandSelection = () => {
                                                                 src={variation.image}
                                                                 alt={variation.name}
                                                                 height={1000}
+                                                                loading="lazy"
                                                                 width={1000}
                                                                 className="w-full h-full sm:w-[52vh] max-w-[500px] min-h-[250px] sm:min-h-[200px] object-contain"
                                                             />

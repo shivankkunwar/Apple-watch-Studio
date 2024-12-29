@@ -308,6 +308,7 @@ const CaseSelection = () => {
                               src={`/images/side/${selectedFace?.id}_${selectedBand?.id}_side.jpg`}
                               height={1000}
                               width={1000}
+                              loading="lazy"
                               alt={variation?.name as string}
                               className="object-cover w-[52vh] max-w-[500px]"
                             />
@@ -317,6 +318,7 @@ const CaseSelection = () => {
                               alt={variation?.name as string}
                               height={1000}
                               width={1000}
+                              loading="lazy"
                               className="w-[42vh] sm:w-[52vh] max-w-[500px] min-h-[250px] sm:min-h-[200px] object-cover"
                             />
                           )}
@@ -342,6 +344,7 @@ const CaseSelection = () => {
               className="w-full h-full object-contain"
               height={1000}
               width={1000}
+              loading="lazy"
             />
           </motion.div>
         )}
