@@ -16,7 +16,7 @@ const FeatureButtons = () => {
   const filteredCases = collections.find((item) => item.id === collection);
 
   return (
-    <div className="w-full fixed bottom-[40px]">
+    <div className="w-full fixed bottom-[0px] sm:bottom-[40px]">
       <div className="overflow-x-auto scrollbar-hide">
         <div className="flex justify-center space-x-4 min-w-min pb-4">
            

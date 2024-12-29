@@ -284,7 +284,8 @@ const CaseSelection = () => {
                     key={variation?.id}
                     style={{
                       width: '312px',
-                      margin: isSideView && isSelected ? '0 100px' : '0',
+                      
+                        margin: isSideView && isSelected ? (window.innerWidth <= 768 ? '0 50px' : '0 100px') : '0',
                       transition: 'all 0.3s ease'
                     }}
                   >
@@ -310,7 +311,7 @@ const CaseSelection = () => {
                               width={1000}
                               loading="lazy"
                               alt={variation?.name as string}
-                              className="object-cover w-[52vh] max-w-[500px]"
+                              className="object-cover w-[52vh] max-w-[300px]"
                             />
                           ) : (
                             <Image
@@ -319,7 +320,7 @@ const CaseSelection = () => {
                               height={1000}
                               width={1000}
                               loading="lazy"
-                              className="w-[42vh] sm:w-[52vh] max-w-[500px] min-h-[250px] sm:min-h-[200px] object-cover"
+                              className=" w-[42vh] sm:w-[52vh] max-w-[500px] min-h-[250px] sm:min-h-[200px] min-w-[350px] object-cover"
                             />
                           )}
                         </motion.div>

@@ -62,18 +62,18 @@ const dispatch = useAppDispatch();
                     isSideView === null
                       ? {
                           opacity: 0,
-                          y: "26rem",
+                          y: "45vh",
                           
                           top: "4vh",
                           scale: isLanding ? 1.5 : scaleValue,
                         }
-                      : { opacity: 0,scale: isLanding ? 1.5 : scaleValue, top: "4vh", }
+                      : { opacity: 0,scale: isLanding ? 1.5 : scaleValue, top: "0", }
                   }
                   animate={{
                     opacity: 1,
-                    y: isSideView === null ? (isLanding ? "26rem" : 0) : 0,
+                    y: isSideView === null ? (isLanding ? "45vh" : 0) : 0,
                     scale: isLanding ? 1.5 : scaleValue,
-                    top: "4vh",
+                    top: "0",
                   }}
                   exit={{ opacity: 0 }}
                   transition={

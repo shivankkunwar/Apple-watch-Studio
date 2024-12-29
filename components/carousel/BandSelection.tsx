@@ -298,7 +298,7 @@ const BandSelection = () => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 h-full w-full max-w-[500px] sm:w-[52vh] px-4 sm:px-0"
+                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 h-full w-full max-w-[400px] sm:w-[52vh] px-4 sm:px-0"
                         >
                             <Image
                                 src={currentFaceImage}
