@@ -1,13 +1,12 @@
 
 import { FaApple } from "react-icons/fa";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import {  useAppSelector } from "@/lib/hooks";
 import { motion } from "framer-motion";
 import { CollectionDrop } from "./CollectionDrop";
 import { SaveModal } from "./SaveModal"
 import { useState } from "react";
 
 export const Header = () => {
-  const dispatch = useAppDispatch();
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false)
   const { isLanding } = useAppSelector(state => state.ui);
 

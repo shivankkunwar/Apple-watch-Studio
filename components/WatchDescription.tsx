@@ -3,7 +3,7 @@ import React from "react";
 
 const WatchDescription = React.memo(() => {
   const { collection, size, selectedFace, band, totalPrice, selectedBand } =
-    useAppSelector((state: any) => state.watch);
+    useAppSelector((state) => state.watch);
 
   return (
     <div className="flex flex-col w-[70%] md:w-[60%]">

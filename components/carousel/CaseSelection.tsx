@@ -6,6 +6,8 @@ import { setFace } from "@/store/slices/watchSlice";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { setIsSideView } from "@/store/slices/uiSlice";
 import Image from "next/image";
+import { RootState } from "@/store/store";
+import { Case, variations } from "@/types/watch";
 
 const CaseSelection = () => {
   const dispatch = useDispatch();
@@ -17,9 +19,9 @@ const CaseSelection = () => {
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   const transitionTimeout = useRef<NodeJS.Timeout | null>(null);
   
-  const { isSideView } = useSelector((state: any) => state.ui);
-  const { currentFaceImage, currentBandImage, size, collection, mainFace, selectedFace, selectedBand } = useSelector(
-    (state: any) => state.watch
+  const { isSideView } = useSelector((state: RootState) => state.ui);
+  const { currentFaceImage, currentBandImage, collection, mainFace, selectedFace, selectedBand } = useSelector(
+    (state: RootState) => state.watch
   );
 
   const collectionCases = collections.find((col) => col.id === collection);
@@ -28,17 +30,17 @@ const CaseSelection = () => {
   );
 
   const collectionList = collections
-      .find((opt: any) => opt.id === collection)
-      ?.cases.find((s: any) => s.id === mainFace.id);
+      .find((opt) => opt.id === collection)
+      ?.cases.find((s) => s.id === mainFace.id);
 
   const variationsList = collectionList?.variations;
 
-  const selected = variationsList?.find((s: any) => s.id === selectedFace.id);
-  const [selectedCaseId, setSelectedCaseId] = useState(selected?.id);
+  const selected = variationsList?.find((s) => s.id === selectedFace.id);
+  const [selectedCaseId, setSelectedCaseId] = useState<string | undefined>(selected?.id);
 
   const handleScroll = () => {
     if (containerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
+      const { scrollLeft } = containerRef.current;
       const currentIndex = Math.round(scrollLeft / 312);
       const maxIndex = allVariations ? allVariations.length - 1 : 0;
       
@@ -109,7 +111,7 @@ const CaseSelection = () => {
     }, 500);
   };
 
-  const handleCaseClick = (variation: any, mainCase: any) => {
+  const handleCaseClick = (variation: variations, mainCase: Case) => {
     if (isScrolling || isTransitioning) return;
     
     setIsTransitioning(true);
@@ -199,6 +201,7 @@ const CaseSelection = () => {
         }
       };
     }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -209,6 +212,7 @@ const CaseSelection = () => {
       setSelectedCaseId(selectedElement.id);
       scrollToElement(selectedElement.id);
     }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentFaceImage, collection]);
 
   useEffect(() => {
@@ -287,7 +291,7 @@ const CaseSelection = () => {
                     <div className="flex items-center justify-center h-full px-3 sm:px-12">
                       <button
                         className={`relative flex items-center justify-center w-full h-full max-w-[calc(100vw-32px)] sm:max-w-[calc(100vw-400px)]`}
-                        onClick={() => !isTransitioning && handleCaseClick(variation, mainCase)}
+                        onClick={() => !isTransitioning && handleCaseClick(variation as variations, mainCase as Case)}
                         disabled={isTransitioning}
                       >
                         <motion.div
@@ -347,4 +351,3 @@ const CaseSelection = () => {
 };
 
 export default CaseSelection;
-

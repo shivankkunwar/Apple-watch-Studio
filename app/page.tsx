@@ -1,11 +1,10 @@
 'use client'
-import { useEffect, useState } from "react";
+import { useEffect, } from "react";
 
 import { LandingPage } from "@/pages/LandingPage";
 import { Header } from "@/components/Header";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { CollectionDrop } from "@/components/CollectionDrop";
 import WatchDescription from "@/components/WatchDescription";
 import FeatureButtons from "@/components/FeatureButtons";
 import SizeSelection from "@/components/carousel/SizeSelection";
@@ -21,9 +20,9 @@ function Home() {
 const dispatch = useAppDispatch();
   const isLanding = useAppSelector((state) => state.ui.isLanding);
   const isSideView = useAppSelector((state) => state.ui.isSideView);
-  const openButton = useAppSelector((state: any) => state.ui.featureButtonOpen);
-  const { currentFaceImage, currentBandImage ,sideImage} = useAppSelector(
-    (state: any) => state.watch
+  const openButton = useAppSelector((state: { ui: { featureButtonOpen: string | null } }) => state.ui.featureButtonOpen);
+  const { currentFaceImage, currentBandImage, sideImage } = useAppSelector(
+    (state: { watch: { currentFaceImage: string; currentBandImage: string; sideImage: string } }) => state.watch
   );
   const scaleValue = useHeightScale();
   useEffect(() => {

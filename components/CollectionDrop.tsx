@@ -1,4 +1,3 @@
-import { Dialog, DialogContent } from "./ui/dialog";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { setIsCollectionDrop } from "@/store/slices/uiSlice";
 import { setCollection } from "../store/slices/watchSlice";

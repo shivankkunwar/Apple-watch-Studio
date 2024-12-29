@@ -1,18 +1,17 @@
-import React, { useState } from "react";
-import { setBand, setFace, setSelectedMainBand, setSelectedMainCase, setSize } from "@/store/slices/watchSlice";
+import React from "react";
+import {  setSelectedMainBand, setSelectedMainCase, setSize } from "@/store/slices/watchSlice";
 import { setFeatureButtonOpen } from "@/store/slices/uiSlice";
-import { useDispatch, useSelector } from "react-redux";
 import { setIsSideView } from "@/store/slices/uiSlice";
-import { motion } from "framer-motion";
 import { collections } from "@/data/collections";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { Band, Case, WatchSize } from "@/types/watch";
 
 const FeatureButtons = () => {
   const dispatch = useAppDispatch();
-  const { collection, size, mainFace, mainBand,band } = useSelector(
-    (state: any) => state.watch
+  const { collection, size, mainFace, mainBand, } = useAppSelector(
+    (state) => state.watch
   );
-  const openButton = useAppSelector((state: any) => state.ui.featureButtonOpen);
+  const openButton = useAppSelector((state) => state.ui.featureButtonOpen);
 
   const filteredCases = collections.find((item) => item.id === collection);
 
@@ -31,7 +30,7 @@ const FeatureButtons = () => {
               <div>
                 {openButton === "Size" ? (
                   <div className="flex space-x-4">
-                    {filteredCases?.sizes?.map((option: any) => (
+                    {filteredCases?.sizes?.map((option: WatchSize) => (
                       <button
                         key={option.id}
                         onClick={() => {
@@ -68,7 +67,7 @@ const FeatureButtons = () => {
               </div>
               {openButton === "Case" ? (
                 <div className="flex space-x-4">
-                  {filteredCases?.cases.map((mainCase: any) => (
+                  {filteredCases?.cases.map((mainCase: Case) => (
                     <button
                       key={mainCase.id}
                       onClick={() => {
@@ -104,7 +103,7 @@ const FeatureButtons = () => {
               </div>
               {openButton === "Band" ? (
                 <div className="flex space-x-4">
-                  {filteredCases?.bands.map((currBand: any) => (
+                  {filteredCases?.bands.map((currBand: Band) => (
                     <button
                       key={currBand.id}
                       onClick={() => {

@@ -1,14 +1,28 @@
-import { collections } from "@/data/collections";
+import { collections, } from "@/data/collections";
+import { Collection, WatchSize} from "@/types/watch";
 import { setSize } from "@/store/slices/watchSlice";
 import { watchImageSize } from "@/data/collections";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useHeightScale from "@/hooks/useHeightScale";
 import { useAppSelector } from "@/lib/hooks";
 import { setIsSideView } from "@/store/slices/uiSlice";
-import { select } from "framer-motion/client";
+
 import Image from "next/image";
+
+interface RootState {
+  watch: {
+    currentBandImage: string;
+    currentFaceImage: string;
+    collection: string;
+    size: WatchSize;
+    selectedFace: { id: string } | null;
+    selectedBand: { id: string } | null;
+  };
+  ui: {
+    isSideView: boolean;
+  };
+}
 
 const SizeSelection = () => {
   const dispatch = useDispatch();
@@ -17,22 +31,19 @@ const SizeSelection = () => {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const { currentBandImage, currentFaceImage } = useAppSelector(
-    (state: any) => state.watch
+    (state) => state.watch
   );
-  const { collection, size, selectedFace, selectedBand, mainBand, mainFace } =
-    useSelector((state: any) => state.watch);
-  const { isSideView } = useSelector((state: any) => state.ui);
-  console.log(isSideView);
+  const { collection, size, selectedFace, selectedBand } = useAppSelector(
+    (state) => state.watch
+  );
+  const { isSideView } = useSelector((state: RootState) => state.ui);
+
   const selected = collections
-    .find((opt: any) => opt.id === collection)
-    ?.sizes.find((s: any) => s.id === size.id);
+    .find((opt: Collection) => opt.id === collection)
+    ?.sizes.find((s: WatchSize) => s.id === size.id);
   const [selectedCaseId, setSelectedCaseId] = useState(selected?.id);
 
-  const handleSizeClick = (option: {
-    id: string;
-    size: string;
-    price: number;
-  }) => {
+  const handleSizeClick = (option: WatchSize) => {
     if (!isDragging) {
       dispatch(setSize(option));
       dispatch(setIsSideView(false));
@@ -114,8 +125,8 @@ const SizeSelection = () => {
     });
 
     const watchId = closestWatch.id.replace("watch-", "");
-    const sizes = collections.find((opt: any) => opt.id === collection)?.sizes;
-    const selectedSize = sizes?.find((s: any) => s.id === watchId);
+    const sizes = collections.find((opt: Collection) => opt.id === collection)?.sizes;
+    const selectedSize = sizes?.find((s: WatchSize) => s.id === watchId);
 
     if (selectedSize) {
       dispatch(setSize(selectedSize));
@@ -153,8 +164,8 @@ const SizeSelection = () => {
               style={{ padding: "0 calc(50% - 140px)" }}
             >
               {collections
-                .find((opt: any) => opt.id === collection)
-                ?.sizes.map((option: any) => {
+                .find((opt: Collection) => opt.id === collection)
+                ?.sizes.map((option: WatchSize) => {
                   const sizeClass = watchImageSize(option.size);
                   const isSelected = selectedCaseId === option.id;
 
@@ -174,10 +185,9 @@ const SizeSelection = () => {
                             src={`/images/side/${selectedFace?.id}_${selectedBand?.id}_side.jpg`}
                             height={1000}
                             width={1000}
-                            alt={option.name}
+                            alt={option?.size}
                             className={`object-cover absolute w-[40vh] max-w-[350px]  `}
                             loading="lazy"
-                            
                           />
                         ) : (
                           <div className={`relative ${sizeClass} `}>

@@ -17,7 +17,7 @@ interface SaveModalProps {
 
 export function SaveModal({ isOpen, onClose }: SaveModalProps) {
   const [copied, setCopied] = useState(false)
-  const { collection, size, selectedFace, selectedBand, totalPrice, sideImage } = useAppSelector((state) => state.watch)
+  const { collection, size, selectedFace, selectedBand, totalPrice, } = useAppSelector((state) => state.watch)
 
   const handleCopyLink = async () => {
     const shareableUrl = generateShareableUrl()
