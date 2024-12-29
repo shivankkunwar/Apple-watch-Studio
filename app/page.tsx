@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, } from "react";
 
-import LandingPage  from "@/pages/LandingPage";
+import LandingPage  from "@/components/LandingPage";
 import { Header } from "@/components/Header";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
