@@ -311,7 +311,7 @@ const CaseSelection = () => {
                               width={1000}
                               loading="lazy"
                               alt={variation?.name as string}
-                              className="object-cover w-[52vh] max-w-[300px]"
+                              className="object-cover w-[52vh] max-w-[300px] md:max-w-[400px]"
                             />
                           ) : (
                             <Image
