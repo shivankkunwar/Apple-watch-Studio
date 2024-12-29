@@ -1,8 +1,8 @@
 import { useAppSelector } from "@/lib/hooks";
+import React from "react";
 
-
-const WatchDescription = () => {
-  const { collection, size, selectedFace , band, totalPrice, selectedBand } =
+const WatchDescription = React.memo(() => {
+  const { collection, size, selectedFace, band, totalPrice, selectedBand } =
     useAppSelector((state: any) => state.watch);
 
   return (
@@ -18,6 +18,9 @@ const WatchDescription = () => {
       </span>
     </div>
   );
-};
+});
+
+WatchDescription.displayName = "WatchDescription";
 
 export default WatchDescription;
+

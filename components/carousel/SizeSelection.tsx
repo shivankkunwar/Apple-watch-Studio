@@ -176,6 +176,8 @@ const SizeSelection = () => {
                             width={1000}
                             alt={option.name}
                             className={`object-cover absolute w-[40vh] max-w-[350px]  `}
+                            loading="lazy"
+                            
                           />
                         ) : (
                           <div className={`relative ${sizeClass} `}>
@@ -185,6 +187,7 @@ const SizeSelection = () => {
                               className="absolute inset-0 w-full h-full object-contain"
                               height={1000}
                               width={1000}
+                              loading="lazy"
                             />
                             <Image
                               src={currentFaceImage}
@@ -192,6 +195,7 @@ const SizeSelection = () => {
                               className=" absolute inset-0 w-full h-full object-contain"
                               height={1000}
                               width={1000}
+                              loading="lazy"
                             />
                           </div>
                         )}
