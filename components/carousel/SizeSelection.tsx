@@ -170,7 +170,7 @@ const SizeSelection = () => {
                         onClick={() => handleSizeClick(option)}
                       >
                         {isSideView && isSelected ? (
-                          <img
+                          <Image
                             src={`/images/side/${selectedFace?.id}_${selectedBand?.id}_side.jpg`}
                             height={1000}
                             width={1000}
@@ -179,17 +179,19 @@ const SizeSelection = () => {
                           />
                         ) : (
                           <div className={`relative ${sizeClass} `}>
-                            <img
+                            <Image
                               src={currentBandImage}
                               alt={`${option.size} band`}
                               className="absolute inset-0 w-full h-full object-contain"
-                             
-                              
+                              height={1000}
+                              width={1000}
                             />
-                            <img
+                            <Image
                               src={currentFaceImage}
                               alt={`${option.size} face`}
                               className=" absolute inset-0 w-full h-full object-contain"
+                              height={1000}
+                              width={1000}
                             />
                           </div>
                         )}

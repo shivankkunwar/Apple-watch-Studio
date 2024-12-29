@@ -8,6 +8,7 @@ import { useState } from "react"
 import { generateShareableUrl } from "@/lib/url-utils"
 import { motion } from "framer-motion"
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+import Image from "next/image"
 
 interface SaveModalProps {
   isOpen: boolean
@@ -48,10 +49,12 @@ export function SaveModal({ isOpen, onClose }: SaveModalProps) {
        
             <div className="relative w-full sm:w-1/2 bg-[#F5F5F7] dark:bg-zinc-800">
               <div className="aspect-square relative">
-                <img
+                <Image
                   src={`/images/side/${selectedFace?.id}_${selectedBand?.id}_side.jpg`}
                   alt="Watch Configuration"
                   className="w-full h-full object-contain p-8"
+                  height={1000}
+              width={1000}
                 />
               </div>
             </div>

@@ -15,6 +15,7 @@ import BandSelection from "@/components/carousel/BandSelection";
 import { setIsSideView } from "@/store/slices/uiSlice";
 import { parseUrlParams, clearUrlParams } from "@/lib/url-utils"
 import { setFullConfiguration } from "@/store/slices/watchSlice"
+import Image from "next/image";
 
 function Home() {
 const dispatch = useAppDispatch();
@@ -92,24 +93,30 @@ const dispatch = useAppDispatch();
                   className="relative overflow-hidden mx-auto max-w-[300px] md:max-w-[400px] lg:max-w-[500px]"
                 >
                   <div className="relative pt-[133%] md:pt-[110%] lg:pt-[104%]">
-                    <img
+                    <Image
                       src={currentBandImage}
                       loading="lazy"
+                      height={1000}
+              width={1000}
                       alt="watch band preview"
                       className="absolute inset-0 object-contain w-full h-full"
                       style={{ zIndex: isSideView ? 1 : 2, top: isSideView ? '0' : 'auto' }} // Adjust z-index and top position
                     />
-                    <img
+                    <Image
                       src={currentFaceImage}
                       loading="lazy"
+                      height={1000}
+              width={1000}
                       alt="watch case preview"
                       className="absolute inset-0 object-contain w-full h-full"
                       style={{ zIndex: isSideView ? 1 : 2, top: isSideView ? '0' : 'auto' }} // Adjust z-index and top position
                     />
                     {isSideView && (
-                      <img
+                      <Image
                         src={sideImage}
                         loading="lazy"
+                        height={1000}
+              width={1000}
                         alt="watch side view"
                         className="absolute inset-0 object-contain w-full h-full"
                         style={{ zIndex: 3, top: '0' }} // Ensure side view image is on top and positioned correctly
@@ -134,7 +141,7 @@ const dispatch = useAppDispatch();
                   }}
                   className="relative"
                 >
-                  <img
+                  <Image
                     src={sideImage}
                     height={1000}
                     width={1000}

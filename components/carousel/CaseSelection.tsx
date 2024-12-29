@@ -336,6 +336,8 @@ const CaseSelection = () => {
               src={currentBandImage}
               alt="watch band"
               className="w-full h-full object-contain"
+              height={1000}
+              width={1000}
             />
           </motion.div>
         )}
