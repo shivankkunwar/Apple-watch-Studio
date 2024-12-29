@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { useAppDispatch } from '@/lib/hooks'
 import { setLanding } from '@/store/slices/uiSlice'
 
-export function LandingPage() {
+export default function LandingPage() {
     const dispatch = useAppDispatch()
   return (
     <motion.div
