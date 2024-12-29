@@ -6,7 +6,7 @@ import { Button } from "./ui/button"
 import { Check, Copy, Share2, X } from 'lucide-react'
 import { useState } from "react"
 import { generateShareableUrl } from "@/lib/url-utils"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 interface SaveModalProps {
@@ -36,7 +36,7 @@ export function SaveModal({ isOpen, onClose }: SaveModalProps) {
         <DialogTitle>Configuration Saved</DialogTitle>
       </VisuallyHidden>
         <div className="relative w-full">
-          {/* Close Button */}
+          
           <button
             onClick={onClose}
             className="absolute right-4 top-4 z-50 rounded-full bg-zinc-100/90 p-2 text-zinc-500 hover:text-zinc-600 hover:bg-zinc-200/90 transition-colors"
@@ -45,7 +45,7 @@ export function SaveModal({ isOpen, onClose }: SaveModalProps) {
           </button>
 
           <div className="flex flex-col sm:flex-row w-full">
-            {/* Image Section */}
+       
             <div className="relative w-full sm:w-1/2 bg-[#F5F5F7] dark:bg-zinc-800">
               <div className="aspect-square relative">
                 <img
@@ -56,7 +56,7 @@ export function SaveModal({ isOpen, onClose }: SaveModalProps) {
               </div>
             </div>
 
-            {/* Content Section */}
+           
             <div className="w-full sm:w-1/2 p-6 flex flex-col justify-between">
               <div className="space-y-6">
                 <div className="space-y-2">

@@ -6,6 +6,7 @@ import { collections } from "@/data/collections";
 import { setBand } from "@/store/slices/watchSlice";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { setIsSideView } from "@/store/slices/uiSlice";
+import Image from "next/image";
 
 const BandSelection = () => {
   const dispatch = useDispatch();
@@ -44,24 +45,6 @@ const BandSelection = () => {
     return 550;
   };
 
-  // Initial centering effect
-  useEffect(() => {
-    if (
-      initialRenderRef.current &&
-      allVariations?.length &&
-      containerRef.current
-    ) {
-      const firstBand = allVariations[0];
-      setSelectedBandId(firstBand.id);
-
-      // Wait for layout to settle
-      setTimeout(() => {
-        scrollToElement(firstBand.id);
-        initialRenderRef.current = false;
-      }, 100);
-    }
-  }, [allVariations]);
-
   useEffect(() => {
     const updateWidth = () => {
       setSlideWidth(calculateSlideWidth());
@@ -74,8 +57,11 @@ const BandSelection = () => {
   const handleScroll = () => {
     if (containerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-      setShowLeftButton(scrollLeft > 0);
-      setShowRightButton(scrollLeft < scrollWidth - clientWidth - 10);
+      const currentIndex = Math.round(scrollLeft / 312);
+      const maxIndex = allVariations ? allVariations.length - 1 : 0;
+
+      setShowLeftButton(currentIndex > 0);
+      setShowRightButton(currentIndex < maxIndex);
     }
   };
 
@@ -236,16 +222,7 @@ const BandSelection = () => {
     setTouchStart(null);
     setTouchEnd(null);
   };
-  useEffect(() => {
-    if (initialRenderRef.current) {
-      initialRenderRef.current = false;
-      return;
-    }
-    // Avoid resetting state unintentionally
-    if (selectedFace && selectedBand) {
-      setSelectedBandId(selectedBand.id);
-    }
-  }, [selectedFace, selectedBand]);
+
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
@@ -303,7 +280,7 @@ const BandSelection = () => {
     if (isSideView) return "0 max(calc(50vw - 255px), 200px)";
     return "0 calc(50vw - 275px)";
   };
-console.log(selectedBand,selectedFace)
+
   return (
     <AnimatePresence>
       <motion.div
@@ -322,10 +299,12 @@ console.log(selectedBand,selectedFace)
               transition={{ duration: 0.3 }}
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 h-full w-full max-w-[500px] sm:w-[52vh] px-4 sm:px-0"
             >
-              <img
+              <Image
                 src={currentFaceImage}
                 alt="watch face"
                 className="w-full h-full object-contain"
+                height={1000}
+                width={1000}
               />
             </motion.div>
           )}
@@ -370,7 +349,7 @@ console.log(selectedBand,selectedFace)
             )}
             <div
               ref={containerRef}
-              className="h-full overflow-x-auto whitespace-nowrap scroll-smooth hide-scrollbar touch-pan-y"
+              className="h-full overflow-x-auto  whitespace-nowrap scroll-smooth hide-scrollbar touch-pan-y"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
@@ -383,7 +362,7 @@ console.log(selectedBand,selectedFace)
                   transition: "all 0.3s ease",
                 }}
               >
-                {allVariations?.map((variation) => {
+                {allVariations?.map((variation,i) => {
                   const currBand = collectionBands?.bands.find((b) => {
                     return b.variations.some((v) => v.id === variation.id);
                   });
@@ -398,7 +377,7 @@ console.log(selectedBand,selectedFace)
                         width: `${slideWidth}px`,
                         margin: isSideView && isSelected ? "0 50px" : "0",
                         transition: "all 0.3s ease",
-                      }}
+                        }}
                     >
                       <div className="flex items-center justify-center h-full px-3 sm:px-12">
                         <button
@@ -419,7 +398,7 @@ console.log(selectedBand,selectedFace)
                             className={`w-full h-full flex justify-center items-center`}
                           >
                             {isSideView && isSelected ? (
-                              <img
+                              <Image
                                 src={`/images/side/${selectedFace?.id}_${selectedBand?.id}_side.jpg`}
                                 height={1000}
                                 width={1000}
@@ -427,9 +406,11 @@ console.log(selectedBand,selectedFace)
                                 className="object-cover w-[52vh] max-w-[500px]"
                               />
                             ) : (
-                              <img
+                              <Image
                                 src={variation.image}
                                 alt={variation.name}
+                                height={1000}
+                                width={1000}
                                 className="w-full h-full sm:w-[52vh] max-w-[500px] min-h-[250px] sm:min-h-[200px] object-contain"
                               />
                             )}

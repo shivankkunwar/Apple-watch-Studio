@@ -5,6 +5,7 @@ import { collections } from "@/data/collections";
 import { setFace } from "@/store/slices/watchSlice";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { setIsSideView } from "@/store/slices/uiSlice";
+import Image from "next/image";
 
 const CaseSelection = () => {
   const dispatch = useDispatch();
@@ -38,8 +39,11 @@ const CaseSelection = () => {
   const handleScroll = () => {
     if (containerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-      setShowLeftButton(scrollLeft > 0);
-      setShowRightButton(scrollLeft < scrollWidth - clientWidth - 10);
+      const currentIndex = Math.round(scrollLeft / 312);
+      const maxIndex = allVariations ? allVariations.length - 1 : 0;
+      
+      setShowLeftButton(currentIndex > 0);
+      setShowRightButton(currentIndex < maxIndex);
     }
   };
 
@@ -280,9 +284,9 @@ const CaseSelection = () => {
                       transition: 'all 0.3s ease'
                     }}
                   >
-                    <div className="flex items-center justify-center h-full px-6">
+                    <div className="flex items-center justify-center h-full px-3 sm:px-12">
                       <button
-                        className={`relative flex items-center justify-center w-full h-full`}
+                        className={`relative flex items-center justify-center w-full h-full max-w-[calc(100vw-32px)] sm:max-w-[calc(100vw-400px)]`}
                         onClick={() => !isTransitioning && handleCaseClick(variation, mainCase)}
                         disabled={isTransitioning}
                       >
@@ -296,18 +300,20 @@ const CaseSelection = () => {
                           transition={{ duration: 0.3 }}
                         >
                           {isSideView && isSelected ? (
-                            <img
+                            <Image
                               src={`/images/side/${selectedFace?.id}_${selectedBand?.id}_side.jpg`}
                               height={1000}
                               width={1000}
-                              alt={variation?.name}
+                              alt={variation?.name as string}
                               className="object-cover w-[52vh] max-w-[500px]"
                             />
                           ) : (
-                            <img
-                              src={variation?.image}
-                              alt={variation?.name}
-                              className="w-[52vh] max-w-[500px] object-contain"
+                            <Image
+                              src={variation?.image as string}
+                              alt={variation?.name as string}
+                              height={1000}
+                              width={1000}
+                              className="w-[42vh] sm:w-[52vh] max-w-[500px] min-h-[250px] sm:min-h-[200px] object-cover"
                             />
                           )}
                         </motion.div>
@@ -325,8 +331,8 @@ const CaseSelection = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 h-[53vh] max-w-[500px] w-[52vh]"  >
-            <img
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 h-full w-full max-w-[500px] sm:w-[52vh] px-4 sm:px-0"  >
+            <Image
               src={currentBandImage}
               alt="watch band"
               className="w-full h-full object-contain"
