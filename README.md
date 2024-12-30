@@ -1,11 +1,12 @@
 
 # Apple Watch Studio Clone
 
-![Apple Watch Studio Clone]([https://your-image-url-here.com/project-preview.png](https://apple-watch-studio-nine.vercel.app/))
+![Apple Watch Studio Clone](https://apple-watch-studio-nine.vercel.app/)
 
 
 
-https://github.com/user-attachments/assets/e81c1458-546e-4211-bd1c-a120b931a3c6
+https://github.com/user-attachments/assets/0db82ec4-d06f-498c-b48d-19a0c0a278d2
+
 
 
 ## Description
