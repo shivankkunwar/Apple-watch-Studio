@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Apple Watch Studio Clone
 
-First, run the development server:
+![Apple Watch Studio Clone](https://your-image-url-here.com/project-preview.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+https://github.com/user-attachments/assets/e81c1458-546e-4211-bd1c-a120b931a3c6
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Description
 
-To learn more about Next.js, take a look at the following resources:
+This project is a clone of the Apple Watch Studio experience, focusing on recreating the seamless customization process demonstrated on [Apple Watch Studio](https://www.apple.com/shop/studio/apple-watch). It allows users to personalize their Apple Watch by selecting different cases, sizes, and bands, with real-time preview updates.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Dynamic carousels for size, case, and band selection
+- Real-time preview updates with front and side views
+- Smooth animations and transitions between selections
+- Responsive design for various screen sizes
+- Redux state management for complex watch configurations
+- URL-based sharing of watch configurations
+- Collection switching (Series 10, Hermès, SE)
 
-## Deploy on Vercel
+## Technologies Used
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Next.js](https://nextjs.org/) - React framework for server-side rendering and static site generation
+- [React](https://reactjs.org/) - JavaScript library for building user interfaces
+- [Redux Toolkit](https://redux-toolkit.js.org/) - State management
+- [TypeScript](https://www.typescriptlang.org/) - Typed superset of JavaScript
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Framer Motion](https://www.framer.com/motion/) - Animation library for React
+- [Lucide React](https://lucide.dev/) - Icon library
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Usage
+
+1. Start on the landing page and click "Get started" to begin customization.
+2. Select your preferred watch size.
+3. Choose a case material and color.
+4. Pick a band type and color.
+5. Use the "Front view" and "Side view" buttons to see different angles of your customized watch.
+6. The total price updates in real-time based on your selections.
+7. Use the "Save" button to generate a shareable link for your configuration.
+
