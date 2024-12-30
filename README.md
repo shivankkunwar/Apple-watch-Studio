@@ -1,7 +1,7 @@
 
 # Apple Watch Studio Clone
 
-![Apple Watch Studio Clone](https://your-image-url-here.com/project-preview.png)
+![Apple Watch Studio Clone]([https://your-image-url-here.com/project-preview.png](https://apple-watch-studio-nine.vercel.app/))
 
 
 
